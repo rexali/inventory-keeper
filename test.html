@@ -1,0 +1,421 @@
+<html>
+<head>
+<title> </title>
+<style>
+    
+.idr{
+    display: block;
+}
+
+.grid-container{
+display:grid;
+grid-template-columns: auto auto auto auto auto;
+background-color: #2196F3;
+padding: 5px;
+}
+
+.col1,.col2,.col3,.col4,.col5{
+width: 20%;
+float: left;
+}
+
+</style>
+
+</head>
+<body>
+
+    <!--
+        <div class='row' >
+                <div class='col1'>No.</div>
+                <div class='col2'>Name</div>
+                <div class='col3'>Address</div>
+                <div class='col4'>Salary</div>
+                <div class='col'>Action</div>
+        </div>
+        <div id ='dg' class='row1' style='width:100%;'>
+            
+                <div class='col1'>1</div>
+                <div class='col2'>Aliya</div>
+                <div class='col3'>Idogi</div>
+                <div class='col4'>2300</div>
+                <div class='col5'><button onclick='edit()'>Edit</button></div>
+    
+        </div>
+        
+        <div id ='vg' class='row2'>
+                <form name='mfm' class='mfm'>
+                <div class='col1'><input class='id' type='text' name='id' value='1'></div>
+                <div class='col2'><input class='id' type='text' name='name'  value='Aliya'></div>
+                <div class='col3'><input type='text' name='address' value='Idogi'></div>
+                <div class='col4'><input type='text' name='salary' value='2300'></div>
+                <div class='col5'><input type='button' class='ed'  value='Save'></div>
+               </form>
+            </div>
+
+        -->
+               
+<!--
+            <div id ="dg" class="row1" style="width:100%;" >
+                    
+                    <div class="col1">2</div>
+                    <div class="col2">Bello</div>
+                    <div class="col3">Inike</div>
+                    <div class="col4">2345</div>
+                    <div class="col5"><button onclick="edit()">Edit</button></div>
+            </div>
+            <div id ="vg" class="row2">
+                    <form name="mfm" class="mfm" >
+                    <div class="col1"><input class="id" type="text" name="id" value="2"></div>
+                    <div class="col2"><input  class="id" type="text" name="name"  value="Bello"></div>
+                    <div class="col3"><input type="text" name="address" value="Inike"></div>
+                    <div class="col4"><input type="text" name="salary" value="2237"></div>
+                    <div class="col5"><input type="button" class="ed"  value="Save"></div>
+                   </form>
+                </div>
+            -->
+
+            <!--'<form name = "dform" align=""><input name="" placeholder="" disabled><input name="" placeholder="" disabled><input name="firstname" placeholder="firstname"><input name="middlename" placeholder="middlename"><input name="lasttname" placeholder="lasttname"><input type="button" onclick="newrecord()" value="Submit"><input name="" placeholder="" disabled><input name="" placeholder="" disabled></form>'; //" <form><input type='text' name='id' value='"+myObj[i].id+"'><input type='text' name='firstname'  value='"+myObj[i].firstname+"'><input type='text' name='middlename' value='"+myObj[i].middlename+"'><input type='text' name='lastname' value='"+myObj[i].lastname+"'><input type='button' onclick='save()' value='Save'></div></form>";
+            -->
+
+            <!--//txt +="<div  class='row'><div class='col1'><input class='id' type='text' name='id' value="+myObj[i].id+" disabled></div> <div class='col2'><input class='id' type='text' name='firstname'  value="+myObj[i].firstname+" disabled></div> <div class='col3'><input type='text' name='middlename' value="+myObj[i].middlename+" disabled></di> <div class='col4'><input type='text' name='lastname' value="+myObj[i].lastname+" disabled></div> <div class='col5'><input type='button' class='ed'  value='Save'></div></div>";-->
+            
+<div class="row">
+        <div class="col1">No.</div>
+        <div class="col2">Name</div>
+        <div class="col3">Address</div>
+        <div class="col4">Salary</div>
+        <div class="col5">Action</div>
+</div>
+<div class="row">
+        <form action="">
+        <div class="col1"><input type="text" value=" +myObj[i].id+ "></div>
+        <div class="col2"><input type="text" value="Aliya"></div>
+        <div class="col3"><input type="text" value="Idogi"></div>
+        <div class="col4"><input type="text" value="2300"></div>
+        <div class="col5"><input type="button" onclick="edit()" value="Edit">&nbsp;<input type="button" onclick="update()" value="Update"></div>
+       </form>
+</div>
+
+
+<script>
+    
+function read() {
+var obj, dbParam, xmlhttp, myObj, x, txt = "";
+
+obj = { "table":"employees", "limit":8 };
+
+document.getElementById("dis").innerHTML="Reading data .... Please wait";
+
+dbParam = JSON.stringify(obj);
+
+  if (window.XMLHttpRequest) {
+    // code for modern browsers
+    xmlhttp = new XMLHttpRequest();
+    } else {
+    // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+
+        txt += "<select>";
+
+        for (x in myObj) {
+
+        txt += "<option>" + myObj[x].name+ "</option>";
+
+        }
+
+        txt += "</select><br>";
+
+        txt += "<div class='row'>";
+
+        txt +="<div class='col1'>No.</div><div class='col2'>Name</div><div class='col3'>Address</div><div class='col4'>Salary</div><div class='col5'>Action</div></div>";
+        for (i = 0; i < myObj.length; i++) {
+        
+            text +="<div class='row'><form name='myform'><div class='col1'><input type='text' name='id' value="+myObj[i].id+"></div><div class='col2'><input type='text' name='name' value="+myObj[i].name+"></div><div class='col3'><input type='text'name='address' value="+ myObj[i].address +"></div><div class='col4'><input type='text' name='salary' value="+myObj[i].salary+"></div><div class='col5'><input id='ed' type='button' onclick='edit()' value='Edit'>&nbsp;<input id='upd' type='button' onclick='update()' value='Update'></div></form></div>";
+                
+           }
+
+        document.getElementById("dis").innerHTML= txt;
+    
+        
+    }
+
+  };
+
+xmlhttp.open("POST", "rd.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
+
+
+}
+
+
+
+function update() {
+    var ids = document.getElementById("ids").value;
+    var add=document.getElementById("add").value;
+    var sal=document.getElementById("sal").value;
+    var nam=document.getElementById("nam").value;
+    var obj, dbParam, xmlhttp, myObj, x = "";
+
+    obj = { "name":nam,"address":add, "salary":sal,"id":ids};
+
+    document.getElementById("svd").value="Updating...";
+
+    dbParam = JSON.stringify(obj);
+
+    if (window.XMLHttpRequest) {
+    // code for modern browsers
+    xmlhttp = new XMLHttpRequest();
+    } else {
+    // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+        
+
+        document.getElementById("dis").innerHTML= myObj.result;
+    }
+  };
+
+xmlhttp.open("POST", "upd.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
+
+    
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    <div class="grid-container">
+                <div class="grid-item"><label class="">No.</button></div>
+                <div class="grid-item"><button class="acc">Name</button></div>
+                <div class="grid-item"><button class="acc"> Address</button></div>
+                <div class="grid-item"><button class="acc">Salary</button></div>
+                <div class="grid-item"><button class="acc">Action</button></div>
+                <div class="grid-item"><button class="acc">1</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">USMAN</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">Inike</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">25000</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">Edit</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><form name='myform'><label for='id'>No.</label><input type='text' name='id' value='1' disabled/><label for=''>Name:</label><input type='text' name='name'/><label for=''>Address:</label><input type='text' name='address'> <label for=''>Salary</label><input type='text' name='salary'><input type='button' name='save'  onclick='update()' id='sav' value='Save'></form></div>
+                <!--<div class="grid-item"><button class="acc">Stewards' Corner</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">Parents and Gaurdians</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">Teachers'Corner</button><div class="panel">Here is primary section</div></div>
+                <div class="grid-item"><button class="acc">Stewards' Corner</button><div class="panel">Here is primary section</div></div>
+                -->
+            </div>
+
+
+
+
+<form action="" style="margin-top:10%; background:tan;">
+        <select name="section" id="">
+        <option value="select section">Select Section</option>
+            <option value="Nursery">Nursery</option>
+            <option value="Reception">Reception</option>
+            <option value="Primary">Primary</option>
+            <option value="Secondary">Secondary</option>
+           
+        </select> &nbsp;&nbsp;
+
+        <select name="class" id="">
+                <option value="select class">Select Class</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="1A">1A</option>
+                    <option value="1B">1B</option>
+                    <option value="1C">1C</option>
+                    <option value="1D">1D</option>
+                    <option value="1E">1E</option>
+                    <option value="2A">2A</option>
+                    <option value="2B">2B</option>
+                    <option value="2C">2C</option>
+                    <option value="2D">2D</option>
+                    <option value="2E">2E</option>
+                    <option value="3A">3A</option>
+                    <option value="3B">3B</option>
+                    <option value="3C">3C</option>
+                    <option value="3D">3D</option>
+                    <option value="3E">3E</option>
+                    <option value="4A">4A</option>
+                    <option value="4B">4B</option>
+                    <option value="4C">4C</option>
+                    <option value="4D">4D</option>
+                    <option value="4E">4E</option>
+                    <option value="5A">5A</option>
+                    <option value="5B">5B</option>
+                    <option value="5C">5C</option>
+                    <option value="5D">5D</option>
+                    <option value="5E">5E</option>
+                    <option value="JSS1A">JSS1A</option>
+                    <option value="JSS1B">JSS1B</option>
+                    <option value="JSS1C">JSS1C</option>
+                    <option value="JSS2A">JSS2A</option>
+                    <option value="JSS2B">JSS2B</option>
+                    <option value="JSS2C">JSS2C</option>
+                    <option value="JSS3A">JSS3A</option>
+                    <option value="JSS3B">JSS3B</option>
+                    <option value="JSS3C">JSS3C</option>
+                    <option value="SS1A">SS1A</option>
+                    <option value="SS1B">SS1B</option>
+                    <option value="SS1C">SS1C</option>
+                    <option value="SS2A">SS2A</option>
+                    <option value="SS2B">SSBB</option>
+                    <option value="SS2C">SS2C</option>
+                    <option value="SS3A">SS3A</option>
+                    <option value="SS3B">SS3B</option>
+                    <option value="SS3C">SS3C</option>
+                   
+                </select> &nbsp;&nbsp;
+
+                <select name="sex" id="">
+                    <option value="sex">Select Sex</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <select name="age" id="">
+                        <option value="select age">Select Age</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="4C">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                           
+                        </select> &nbsp;&nbsp;
+
+                
+        <input type="button" value="Enter scores for the subject selected">
+    </form>
+
+    <form action="">
+        <fieldset>
+        <legend>Enter your data here to update previous record above</legend>
+        <label for="">Id:</label>
+        <input type="text" name="id">
+        <label for="">Name:</label>
+        <input type="text" name="name">
+        <label for="">Address:</label>
+        <input type="text" name="address">
+        <label for="">Salary</label>
+        <input type="text" name="salary">
+       </fieldset>
+
+    </form>
+    <button onclick="displayform()">Form</button>
+    <p id="f" style="text-align:center;"></p><br><br>
+    <p id="shw">3</p>
+    <table border="2">
+            <thead><tr><th>Nomber</th> <th>Name</th><th>Address</th><th>Salary</th><th>Action</th></tr></thead>
+            <tbody>
+            <tr id="ins"><td><input id="df" type="text" value="td" disabled></td><td><input type="text" value="gt" disabled></td><td><input type="text" disabled></td><td><input type="text" disabled></td><td><input type='button' name='edit'  onclick='editform("+Obj[i].id+")' id="edi" class='ed' value='Edit'><input type='button' name='read'  onclick='read()' id='vw' value='View'></td></tr>
+            <tr id="" style="display:none;" ><td><input id="df" type="text" value="1" ></td><td><input type="text" value="Daniel"></td><td><input type="text" value="Kumbotso"></td><td><input type="text" value="1000"></td><td><input type='button'  onclick='update()' class='sav' value='Save'></td></tr>
+            <tr id="ftd"><td colspan="5" style="text-align:center;"><form name='myform'><fieldset style="max-width:100%;"><legend>Enter your data here to update previous record above</legend><label for='id'>No.</label><input type='text' name='id' value='1' disabled/><label for=''>Name:</label><input type='text' name='name'/><label for=''>Address:</label><input type='text' name='address'> <label for=''>Salary</label><input type='text' name='salary'><input type='button' name='save'  onclick='update()' id='sav' value='Save'></fieldset></td></form></tr>
+       
+            <tr ><td><input id="df" type="text" value="td" ></td><td><input type="text" value="gt"></td><td><input type="text"></td><td><input type="text"></td><td><input type='button' name='edit'  onclick='editform()' class='ed' value='Edit'><input type='button' name='read'  onclick='read()' id='vw' value='View'></td></tr>
+            <tr><td id="ibf"></td></tr>
+            
+            <tr><td><input id="df" type="text" value="td"></td><td><input type="text" value="gt"></td><td><input type="text"></td><td><input type="text"></td><td><input type='button' name='edit'  onclick='editform()' class='ed' value='Edit'><input type='button' name='read'  onclick='read()' id='vw' value='View'></td></tr>
+           
+            
+            <tr><td><input id="df" type="text" value="td"></td><td><input type="text" value="gt"></td><td><input type="text"></td><td><input type="text"></td><td><input type='button' name='edit'  onclick='editform()' class='ed' value='Edit'><input type='button' name='read'  onclick='read()' id='vw' value='View'></td></tr>
+            </tbody>
+    </table>
+
+
+   
+    <script>
+        
+      
+   // function editform() {
+       var i,fm;
+        fm=document.getElementsByClassName("ed");
+
+        for (i = 0; i < fm.length; i++) {
+           
+           fm[i].addEventListener("click",function(){
+            document.getElementById("shw").innerHTML="How are you";
+            document.getElementById("ftd").style.display="inline";
+            //document.getElementById("ins").nextElementSibling.style.display="block";
+               
+           });
+           
+        }
+
+        
+        
+        // innerHTML="<form name='myform'><fieldset><legend>Enter your data here to update previous record above</legend><label for='id'>No.</label><input type='text' name='id' value='1' disabled/><label for=''>Name:</label><input type='text' name='name'/><label for=''>Address:</label><input type='text' name='address'> <label for=''>Salary</label><input type='text' name='salary'><input type='button' name='save'  onclick='update()' id='sav' value='Save'></fieldset></form>";
+       
+   // }
+
+    function update() {
+        document.getElementById("sav").value="Updating..."
+        var fdat= document.forms["myform"]["id"].value;
+        document.getElementById("fval").innerHTML=fdat;
+        
+    }
+
+
+    </script>
+
+</body>
+</html>
